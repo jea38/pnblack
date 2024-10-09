@@ -1,6 +1,6 @@
 <?php
 // Database hostname, don't change this unless your hostname is different
-define('db_host','pnblack-server.mysql.database.azure.com');
+define('db_host','pnblack-server.mysql.database.azure.com:3306');
 // Database username
 define('db_user','npjqjzlquh');
 // Database password
