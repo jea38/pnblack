@@ -1,12 +1,12 @@
 <?php
 // Database hostname, don't change this unless your hostname is different
-define('db_host','localhost');
+define('db_host','pnblack-server');
 // Database username
-define('db_user','root');
+define('db_user','npjqjzlquh');
 // Database password
-define('db_pass','');
+define('db_pass','mk9e22L4PcfzXV$U');
 // Database name
-define('db_name','opnblack');
+define('db_name','pnblack-database');
 // This will change the title on the website
 define('site_name','PnBlack');
 // Currency code, default is USD, you can view the list here: http://cactus.io/resources/toolbox/html-currency-symbol-codes
