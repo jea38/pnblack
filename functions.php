@@ -87,7 +87,7 @@ echo <<<EOT
     <meta charset="UTF-8">
     <link rel="profile" href="https://gmpg.org/xfn/11">
     <title>$site_name</title>
-    <link rel="icon" type="image/png" href="http://192.168.1.132/pnblack/shared/pnbs.png">
+    <link rel="icon" type="image/png" href=" https://pnblack.azurewebsites.net/shared/pnbs.png">
     <meta name="description" content=" ABC ABC ABC ABC ABC " />
     <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="google-site-verification" content="1Ar4sDsS4N8_Qg9vgkePTmoMmBxPWposl4A1QJ9mFsw" />
@@ -100,12 +100,12 @@ echo <<<EOT
     <meta property="og:description" content=" ABC ABC ABC ABC ABC " />
     <meta property="og:url" content="/" />
     <meta property="fb:app_id" content="bluetowel" />
-    <meta property="og:image" content="http://192.168.1.132/pnblack/shared/pnbs.jpg" />
-    <meta property="og:image:secure_url" content="http://192.168.1.132/pnblack/shared/pnbs.jpg" />
+    <meta property="og:image" content=" https://pnblack.azurewebsites.net/shared/pnbs.jpg" />
+    <meta property="og:image:secure_url" content=" https://pnblack.azurewebsites.net/shared/pnbs.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="PnBlack | #1 website | site.com  " />
     <meta name="twitter:description" content=" ABC ABC ABC ABC ABC " />
-    <meta name="twitter:image" content="http://192.168.1.132/pnblack/shared/pnbs.jpg" />
+    <meta name="twitter:image" content=" https://pnblack.azurewebsites.net/shared/pnbs.jpg" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta name="x-apple-disable-message-reformatting">
@@ -128,7 +128,7 @@ echo <<<EOT
     <header>
         <nav class="container">
           <div id="nav-logo">
-            <img class="nlogo" src="http://192.168.1.132/pnblack/shared/pnbf22.png">
+            <img class="nlogo" src=" https://pnblack.azurewebsites.net/shared/pnbf22.png">
           </div>
          
           <div class="hamburger">
@@ -309,7 +309,7 @@ echo <<<EOT
         <section id="footer" class="line py-2">
           <div class="container">
             <div id="nav-logo">
-                <img class="nlogo" src="http://192.168.1.132/pnblack/shared/pnbf22.png">
+                <img class="nlogo" src=" https://pnblack.azurewebsites.net/shared/pnbf22.png">
              <div class="social-icon">
                 <a href="#"><i class="fa-brands fa-telegram"></i></a>
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -391,7 +391,7 @@ echo <<<EOT
 		<meta name="viewport" content="width=device-width,minimum-scale=1">
    <meta http-equiv="refresh" content="4000;url=index.php?page=logout" />
 		<title>$title</title>
-        <link rel="icon" type="image/png" href="http://192.168.1.132/pnblack/shared/pnbs.png">
+        <link rel="icon" type="image/png" href=" https://pnblack.azurewebsites.net/shared/pnbs.png">
 		<link href="admin.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
 	</head>

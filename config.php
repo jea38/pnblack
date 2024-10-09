@@ -41,11 +41,11 @@ define('paypal_testmode',true);
 // Currency to use with PayPal, default is USD
 define('paypal_currency','USD');
 // PayPal IPN url, this should point to the IPN file located in the "ipn" directory
-define('paypal_ipn_url','https://yourwebsite.com/ipn/paypal.php');
+define('paypal_ipn_url',' https://pnblack.azurewebsites.net/ipn/paypal.php');
 // PayPal cancel URl, the page the customer returns to when they cancel the payment
-define('paypal_cancel_url','https://yourwebsite.com/cart');
+define('paypal_cancel_url',' https://pnblack.azurewebsites.net/cart');
 // PayPal return URL, the page the customer returns to after the payment has been made:
-define('paypal_return_url','https://yourwebsite.com/placeorder');
+define('paypal_return_url',' https://pnblack.azurewebsites.net/placeorder');
 
 /* Stripe */
 // Accept payments with Stripe?
@@ -57,15 +57,15 @@ define('stripe_publish_key','');
 // Stripe currency
 define('stripe_currency','USD');
 // Stripe IPN url, this should point to the IPN file located in the "ipn" directory
-define('stripe_ipn_url','https://yourwebsite.com/ipn/stripe.php');
+define('stripe_ipn_url',' https://pnblack.azurewebsites.net/ipn/stripe.php');
 // Stripe cancel URl, the page the customer returns to when they cancel the payment
-define('stripe_cancel_url','https://yourwebsite.com/cart');
+define('stripe_cancel_url',' https://pnblack.azurewebsites.net/cart');
 // Stripe return URL, the page the customer returns to after the payment has been made
-define('stripe_return_url','https://yourwebsite.com/placeorder');
+define('stripe_return_url',' https://pnblack.azurewebsites.net/placeorder');
 
 /* Coinbase */
 // Create a new webhook endpoint in the coinbase commerce dashboard and add the full url to the IPN file along with the key parameter
-// Webhook endpoint URL example: https://yourwebsite.com/shoppingcart/ipn/coinbase.php?key=SAME_AS_COINBASE_SECRET
+// Webhook endpoint URL example:  https://pnblack.azurewebsites.net/shoppingcart/ipn/coinbase.php?key=SAME_AS_COINBASE_SECRET
 // Accept payments with coinbase?
 define('coinbase_enabled',true);
 // Coinbase API Key
@@ -75,7 +75,7 @@ define('coinbase_secret','d1d443c2-008f-4f96-9be9-0cce22282315');
 // Coinbase currency
 define('coinbase_currency','USD');
 // Coinbase cancel URl, the page the customer returns to when they cancel the payment
-define('coinbase_cancel_url','https://yourwebsite.com/cart');
+define('coinbase_cancel_url',' https://pnblack.azurewebsites.net/cart');
 // Coinbase return URL, the page the customer returns to after the payment has been made
-define('coinbase_return_url','https://yourwebsite.com/placeorder');
+define('coinbase_return_url',' https://pnblack.azurewebsites.net/placeorder');
 ?>

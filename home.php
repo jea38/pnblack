@@ -68,7 +68,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       
         <section id="section-3">
         <div class="img-cont ">
-            <img class="user-select-none pe-none" src="http://192.168.1.132/pnblack/shared/globe.gif" alt=""  />
+            <img class="user-select-none pe-none" src="https://pnblack.azurewebsites.net/shared/globe.gif" alt=""  />
           </div>
           <div class="container py-5">
             <div class="title flow">
