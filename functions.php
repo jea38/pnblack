@@ -2,8 +2,14 @@
 // Function that will connect to the MySQL database
 function pdo_connect_mysql() {
     try {
+
+         // Set the SSL options
+         $options = [
+            PDO::MYSQL_ATTR_SSL_CA => 'DigiCertGlobalRootCA.crt.pem', // Update this path
+        ];
+        
         // Connect to the MySQL database using the PDO interface
-    	$pdo = new PDO('mysql:host=' . db_host . ';dbname=' . db_name . ';charset=utf8', db_user, db_pass);
+    	$pdo = new PDO('mysql:host=' . db_host . ';dbname=' . db_name . ';charset=utf8', db_user, db_pass, $options);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     } catch (PDOException $exception) {
