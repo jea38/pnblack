@@ -82,7 +82,7 @@ $base_url = base_url;
 // DO NOT INDENT THE BELOW CODE
 echo <<<EOT
 <!DOCTYPE html>
-<html lang="en-US" prefix="og: https://ogp.me/ns#">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <link rel="profile" href="https://gmpg.org/xfn/11">
@@ -111,10 +111,10 @@ echo <<<EOT
     <meta name="x-apple-disable-message-reformatting">
     <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
-    <link rel='stylesheet' href='{$base_url}css/main.css'>
-    <link rel='stylesheet' href='{$base_url}css/pnblack.css'>
-    <link rel='stylesheet' href='{$base_url}css/2.css'>
-    <link rel='stylesheet' href='{$base_url}css/p_view.css'>
+    <link rel='stylesheet' href='css/main.css'>
+    <link rel='stylesheet' href='css/pnblack.css'>
+    <link rel='stylesheet' href=' css/2.css'>
+    <link rel='stylesheet' href=' css/p_view.css'>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
@@ -331,9 +331,9 @@ echo <<<EOT
 <script>
 const currency_code = "$currency_code", base_url = "$base_url", rewrite_url = $rewrite_url;
 </script>
-<script src="{$base_url}script.js"></script>
-<script src="{$base_url}js/p_view.js"></script>
-<script src="{$base_url}js/main.js"></script>
+<script src=" script.js"></script>
+<script src=" js/p_view.js"></script>
+<script src=" js/main.js"></script>
 
 </body>
 </html>
