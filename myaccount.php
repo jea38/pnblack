@@ -150,7 +150,7 @@ for(var i = 0; i < myaccountlink.length; i++){
 
 
 <section id="landing-section">
-          <img loading="lazy" class="column_1 user-select-none pe-none" src="https://i.pinimg.com/736x/04/2f/f4/042ff44fb9c5733c61667685e2455904.jpg" alt="" />
+          <img loading="lazy" class="column_1 user-select-none pe-none" src="https://pnblack.com/shared/featured-image.jpg" alt="" />
           <div class="column_2">
             <div></div>
             <div class="column_2b">
@@ -172,7 +172,7 @@ for(var i = 0; i < myaccountlink.length; i++){
           <div class="credentials-box login">
                 <h3>sign in to your account.</h3>
               <?php if ($error): ?>
-            <p class="error"><?=$error?></p>
+            <p style="color:var(--clr-sec-400);"><?=$error?></p>
             <?php endif; ?>
 
             
@@ -254,7 +254,7 @@ for(var i = 0; i < myaccountlink.length; i++){
                     <tbody>
                     <div style="color:var(--clr-pri-400);"><span>ID: # <?=$transaction['id']?></div>
                       <div><span>Tracking Number: </span><span style="color:var(--clr-pri-400);"><?=$transaction['tracking_number']?></span></div>
-                    <div><span>Carrier: </span><a style="color:var(--clr-pri-400);" target="_blank" href="https://tools.usps.com/go/TrackConfirmAction_input"><?=$transaction['carrier']?></a></div>
+                    <div><span>Carrier: </span><span style="color:var(--clr-pri-400);"><?=$transaction['carrier']?></span></div>
 
                         <?php foreach ($transactions_items as $transaction_item): ?>
                         <?php if ($transaction_item['txn_id'] != $transaction['txn_id']) continue; ?>

@@ -1,5 +1,5 @@
 <?php
-define('shoppingcart', true);
+define('pnblack', true);
 include '../config.php';
 include '../functions.php';
 // Get all input variables and convert them all to URL string variables

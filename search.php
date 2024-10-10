@@ -30,7 +30,7 @@ for(var i = 0; i < productslink.length; i++){
 
 
 <section id="landing-section">
-          <img loading="lazy" class="column_1 user-select-none pe-none" src="https://i.pinimg.com/736x/04/2f/f4/042ff44fb9c5733c61667685e2455904.jpg" alt="" />
+          <img loading="lazy" class="column_1 user-select-none pe-none" src="https://pnblack.com/shared/featured-image.jpg" alt="" />
           <div class="column_2">
             <div></div>
             <div class="column_2b">
@@ -52,7 +52,7 @@ for(var i = 0; i < productslink.length; i++){
 
     <h4>Search Results for "<?=$search_query?>" :</h4>
     <h4 style="color:var(--clr-purp);"><?=$total_products?> Product<?=$total_products!=1?'s':''?></h4>
-    <a class='button_e' href='index.php?page=products'>RETURN</a>
+    <a class='button_e' href='<?=url('index.php?page=products')?>'>RETURN</a>
 
                         <div class="card-grid">
         <?php foreach ($products as $product): ?>

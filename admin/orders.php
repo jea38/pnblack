@@ -34,13 +34,13 @@ if ($method == 2) $where .= $where ? 'AND payment_method = "paypal" ' : 'WHERE p
 if ($method == 3) $where .= $where ? 'AND payment_method = "stripe" ' : 'WHERE payment_status = "stripe" ';
 // Account ID filter
 if ($account_id) $where .= $where ? 'AND account_id = :account_id ' : 'WHERE account_id = :account_id ';
-// Retrieve the total number of products
+// Retrieve the total number of transactions
 $stmt = $pdo->prepare('SELECT COUNT(DISTINCT t.id) AS total FROM transactions t LEFT JOIN transactions_items ti ON ti.txn_id = t.txn_id ' . $where);
 if ($search) $stmt->bindParam('search', $param3, PDO::PARAM_STR);
 if ($account_id) $stmt->bindParam('account_id', $account_id, PDO::PARAM_INT);
 $stmt->execute();
 $orders_total = $stmt->fetchColumn();
-// SQL query to get all products from the "products" table
+// Retrieve transactions 
 $stmt = $pdo->prepare('SELECT t.*, COUNT(ti.id) AS total_products FROM transactions t LEFT JOIN transactions_items ti ON ti.txn_id = t.txn_id ' . $where . ' GROUP BY t.id, t.txn_id, t.payment_amount, t.payment_status, t.created, t.payer_email, t.first_name, t.last_name, t.address_street, t.address_city, t.address_state, t.address_zip, t.address_country, t.account_id, t.payment_method, t.discount_code, t.shipping_method, t.shipping_amount ORDER BY ' . $order_by . ' ' . $order . ' LIMIT :start_results,:num_results');
 // Bind params
 $stmt->bindParam('start_results', $param1, PDO::PARAM_INT);
@@ -148,7 +148,7 @@ if (isset($_GET['success_msg'])) {
                     <td class="responsive-hidden"><?=$i['total_products']?></td>
                     <td><?=currency_code?><?=number_format($i['payment_amount'], 2)?></td>
                     <td class="responsive-hidden"><?=$i['payment_method']?></td>
-                     <td class="responsive-hidden"><span class="status <?=strtolower($i['payment_status'])?>"><?=$i['payment_status']?></span></td>
+                    <td class="responsive-hidden"><span class="status <?=strtolower($i['payment_status'])?>"><?=$i['payment_status']?></span></td>
                     <td class="responsive-hidden"><?=date('F j, Y', strtotime($i['created']))?></td>
                     <td><a href="index.php?page=order&id=<?=$i['id']?>" class="link1">View</a> <a href="index.php?page=order_manage&id=<?=$i['id']?>" class="link1">Edit</a></td>
                 </tr>

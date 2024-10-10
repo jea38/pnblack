@@ -44,7 +44,7 @@ if ($search) $stmt->bindParam('search', $param3, PDO::PARAM_STR);
 $stmt->execute();
 // Retrieve query results
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// Delete account
+// Delete product
 if (isset($_GET['delete'])) {
     // Delete the product
     $stmt = $pdo->prepare('DELETE p, pm, po, pc FROM products p LEFT JOIN products_media pm ON pm.product_id = p.id LEFT JOIN products_options po ON po.product_id = p.id LEFT JOIN products_categories pc ON pc.product_id = p.id WHERE p.id = ?');

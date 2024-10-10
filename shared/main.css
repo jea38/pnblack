@@ -961,7 +961,7 @@ footer .copy-tag {
 
 .copy-tag a{
   font-size: var(--fs-5);
-  text-decoration: underline;
+  color:var(--clr-dark);background:var(--clr-light); border-radius: 5px; padding: 5px;
 }
 
 #footer #nav-logo {

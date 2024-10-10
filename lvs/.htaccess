@@ -1,10 +1,15 @@
 Options -MultiViews
-RewriteEngine On
+Options -Indexes
 
-# Redirect .php requests to extensionless URLs
-RewriteCond %{THE_REQUEST} ^[A-Z]+\s/([^.]+)\.php [NC]
-RewriteRule ^ /%1 [R=301,L]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /lvs/
 
-# Internally rewrite extensionless URLs to corresponding .php files
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^([^/.]+)$ $1.php [L]
+    # Redirect .php requests to extensionless URLs
+    RewriteCond %{THE_REQUEST} ^[A-Z]+\s/([^.]+)\.php [NC]
+    RewriteRule ^ /%1 [R=301,L]
+
+    # Internally rewrite extensionless URLs to corresponding .php files
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^([^/.]+)$ $1.php [L]
+</IfModule>

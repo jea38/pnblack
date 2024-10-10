@@ -13,7 +13,7 @@ $errors = array();
             $insert_code = "UPDATE accounts SET code = $code WHERE email = '$email'";
             $run_query =  mysqli_query($con, $insert_code);
             if($run_query){
-                define('mail_from','support@site.com');
+                define('mail_from','noreply@pnblack.com');
                 $subject = "Password Reset Code";
                    $headers = 'From: ' . mail_from . "\r\n" . 'Reply-To: ' . $email . "\r\n" . 'Return-Path: ' . mail_from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
                  ob_start();

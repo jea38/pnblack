@@ -115,7 +115,7 @@ for(var i = 0; i < productslink.length; i++){
 } 
 </script>
 
-     <a href="index.php?page=products">
+     <a href="<?=url('index.php?page=products')?>">
                   <button class="button-colordot bcalt">                 
                             <span><i class='fas fa-angle-double-left'></i>RETURN</span>
                         </button>
@@ -237,6 +237,7 @@ for(var i = 0; i < productslink.length; i++){
             <label for="quantity">Quantity</label>
             <input id="quantity" type="number" name="quantity" value="1" min="1"<?php if ($product['quantity'] != -1): ?> max="<?=$product['quantity']?>"<?php endif; ?> placeholder="Quantity" required>
            </div>
+           <p style="color:var(--clr-gray-400);">For more information on how shopping and shipping works, <a style="color:var(--clr-purp);" href="https://pnblack.com/info/p/6/a-simple-guide-to-shopping-on-our-website"> click here </a></p>
             <span class="divider"></span>
             <?php if ($product['quantity'] == 0): ?>
             <button type="submit" value="Out of Stock" class="button_e" align="center"  disabled>

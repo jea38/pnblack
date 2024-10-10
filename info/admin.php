@@ -15,9 +15,8 @@ require_once 'security.php';
          <button type="submit" class="button-colordot">
           <span>SEARCH</span>
                </button>
-              <a href="generate_slugs.php"> <button type="submit" class="button-colordot">
-          <span>Generate slugs (SEO URLs)</span>
-               </button></a>
+              <br><a href="generate_slugs.php" class="button-colordot"><span>Generate slugs (SEO URLs)</span>
+               </a>
     </form>
 </section>
 

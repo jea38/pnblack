@@ -68,14 +68,14 @@ for(var i = 0; i < productslink.length; i++){
 </script>
 
         <section id="landing-section">
-          <img loading="lazy" class="column_1 user-select-none pe-none" src="https://i.pinimg.com/736x/04/2f/f4/042ff44fb9c5733c61667685e2455904.jpg" alt="" />
+          <img loading="lazy" class="column_1 user-select-none pe-none" src="https://pnblack.com/shared/featured-image.jpg" alt="" />
           <div class="column_2">
             <div></div>
             <div class="column_2b">
               <h1 class="d3">
                 PnBlack <span class='typewriter-text' data-text='[ "Store 🛒"]'></span>
             </h1>
-<h4><?=$total_products?> Product<?=$total_products!=1?'s':''?></h4>
+<h5><?=$total_products?> Product<?=$total_products!=1?'s':''?></h5>
 
 <div>
     <form class="credentials-box search" onsubmit="submitSearch(event);" role="search">

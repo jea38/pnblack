@@ -65,7 +65,7 @@ if (location.search.includes('success_msg') || location.search.includes('error_m
 document.body.addEventListener('click', event => {
     if (!event.target.closest('.multiselect')) {
         document.querySelectorAll('.multiselect .list').forEach(element => element.style.display = 'none');
-    }
+    } 
 });
 document.querySelectorAll('.multiselect').forEach(element => {
     let updateList = () => {
@@ -104,8 +104,8 @@ document.querySelectorAll('.multiselect').forEach(element => {
         `;
         if (element.querySelector('.item')) {
             let ele = element.querySelectorAll('.item');
-            ele = ele[ele.length - 1];
-            ele.insertAdjacentHTML('afterend', html);
+            ele = ele[ele.length-1];
+            ele.insertAdjacentHTML('afterend', html);                          
         } else {
             element.insertAdjacentHTML('afterbegin', html);
         }
@@ -146,7 +146,7 @@ const modal = options => {
     if (options.state == 'close') {
         options.close({ source: element, button: null });
     } else if (options.state == 'open') {
-        options.open({ source: element });
+        options.open({ source: element }); 
     }
     element.querySelectorAll('.dialog-close').forEach(e => {
         e.onclick = event => {
@@ -159,7 +159,7 @@ const modal = options => {
 const openMediaLibrary = options => modal({
     media: [],
     state: 'open',
-    modalTemplate: function () {
+    modalTemplate: function() {
         return `
         <div class="dialog large media-library-modal">
             <div class="content">
@@ -183,7 +183,7 @@ const openMediaLibrary = options => modal({
         </div>
         `;
     },
-    detailsTemplate: function (media, img) {
+    detailsTemplate: function(media, img) {
         return `
         <form class="media-details-form" method="post" action="index.php?page=api&action=media&id=${media.id}">
             <h3>Media Details</h3>
@@ -202,7 +202,7 @@ const openMediaLibrary = options => modal({
         </form>
         `;
     },
-    selectMedia: function (id) {
+    selectMedia: function(id) {
         for (let i = 0; i < this.media.length; i++) {
             if (this.media[i].id == id) {
                 this.media[i].selected = true;
@@ -210,7 +210,7 @@ const openMediaLibrary = options => modal({
             }
         }
     },
-    unselectMedia: function (id) {
+    unselectMedia: function(id) {
         for (let i = 0; i < this.media.length; i++) {
             if (this.media[i].id == id) {
                 this.media[i].selected = false;
@@ -218,10 +218,10 @@ const openMediaLibrary = options => modal({
             }
         }
     },
-    getAllSelectedMedia: function () {
+    getAllSelectedMedia: function() {
         return this.media.filter(media => media.selected);
     },
-    populateMedia: function (data) {
+    populateMedia: function(data) {
         data = data ? data : this.media;
         if (this.media.length > 0) {
             document.querySelectorAll('.media-library-modal a.media-image').forEach(element => element.remove());
@@ -283,12 +283,12 @@ const openMediaLibrary = options => modal({
                                 this.media = newData;
                                 document.querySelector('.media-library-modal .media .details').innerHTML = `<p>No media selected.</p>`;
                                 this.populateMedia();
-                            });
+                            });                                
                         }
                     };
                 }
             };
-            data[i].element = a;
+            data[i].element = a; 
             document.querySelector('.media-library-modal .media .list').append(a);
         }
         this.getAllSelectedMedia().forEach(media => {
@@ -298,9 +298,9 @@ const openMediaLibrary = options => modal({
             document.querySelector('.media-library-modal .media .loader').remove();
         }
     },
-    onOpen: function () {
+    onOpen: function() {
         fetch('index.php?page=api&action=media', { cache: 'no-store' }).then(response => response.json()).then(data => {
-            this.media = data;
+            this.media = data; 
             this.populateMedia();
             if (options.onMediaLoad) options.onMediaLoad();
         });
@@ -310,7 +310,7 @@ const openMediaLibrary = options => modal({
             input.type = 'file';
             input.multiple = 'multiple';
             input.accept = 'image/*';
-            input.onchange = event => {
+            input.onchange = event => { 
                 document.querySelector('.media-library-modal .upload-media').innerHTML = '<div class="loader"></div>';
                 let form = new FormData();
                 for (let i = 0; i < event.target.files.length; i++) {
@@ -328,7 +328,7 @@ const openMediaLibrary = options => modal({
                             }
                         }
                     }
-                    this.media = data;
+                    this.media = data; 
                     this.populateMedia();
                     document.querySelector('.media-library-modal .upload-media').innerHTML = 'Upload';
                 });
@@ -339,14 +339,14 @@ const openMediaLibrary = options => modal({
             document.querySelector('.media-library-modal .media .details').innerHTML = `<p>No media selected.</p>`;
             this.populateMedia(this.media.filter(media => {
                 return media.title.toLowerCase().includes(document.querySelector('.media-library-modal .search-media').value.toLowerCase())
-                    || media.caption.toLowerCase().includes(document.querySelector('.media-library-modal .search-media').value.toLowerCase());
+                        || media.caption.toLowerCase().includes(document.querySelector('.media-library-modal .search-media').value.toLowerCase());
             }));
             this.getAllSelectedMedia().forEach(media => {
                 if (media.selected) this.selectMedia(media.id);
             });
         };
     },
-    onClose: function (event) {
+    onClose: function(event) {
         if (options.onSave && event && event.button && event.button.classList.contains('save')) options.onSave(this.getAllSelectedMedia());
         if (options.onClose) options.onClose();
     }
@@ -355,7 +355,7 @@ const openOptionsModal = options => modal({
     state: 'open',
     selectedOptionContainer: null,
     selectedOptionType: null,
-    modalTemplate: function () {
+    modalTemplate: function() {
         return `
         <div class="dialog medium options-modal">
             <div class="content">
@@ -388,7 +388,7 @@ const openOptionsModal = options => modal({
         </div>
         `;
     },
-    optionTemplate: function (type) {
+    optionTemplate: function(type) {
         return `
         <div class="option-content" data-type="${type}">
             <div class="table">
@@ -411,7 +411,7 @@ const openOptionsModal = options => modal({
         </div>           
         `;
     },
-    optionValueTemplate: function (type, option) {
+    optionValueTemplate: function(type, option) {
         if (type == 'text' || type == 'datetime') {
             return `
             <tr class="option-value">
@@ -438,7 +438,7 @@ const openOptionsModal = options => modal({
                     </div>
                 </td>
             </tr>
-            `;
+            `;                
         } else {
             return `
             <tr class="option-value">
@@ -467,7 +467,7 @@ const openOptionsModal = options => modal({
             `;
         }
     },
-    onOpen: function () {
+    onOpen: function() {
         this.element.querySelector('.option-type').onchange = () => {
             this.element.querySelectorAll('.option-content').forEach(element => element.style.display = 'none');
             this.element.querySelectorAll('.option-content')[this.element.querySelector('.option-type').value].style.display = 'flex';
@@ -494,7 +494,7 @@ const openOptionsModal = options => modal({
             this.element.querySelectorAll('.remove-option-value').forEach(element => element.onclick = () => element.closest('.option-value').remove());
         }
     },
-    onClose: function (event) {
+    onClose: function(event) {
         if (options.onSave && event && event.button && event.button.classList.contains('save') && this.selectedOptionType != null) {
             if (!this.element.querySelector('.option-title').value) {
                 this.element.querySelector('.option-title').setCustomValidity('Please enter the option title!');
@@ -504,7 +504,7 @@ const openOptionsModal = options => modal({
             if (options.reservedTitles.includes(this.element.querySelector('.option-title').value.toLowerCase()) && this.element.querySelector('.option-title').value.toLowerCase() != this.element.querySelector('.option-title').dataset.defaultTitle.toLowerCase()) {
                 this.element.querySelector('.option-title').setCustomValidity('Title already exists!');
                 this.element.querySelector('.option-title').reportValidity();
-                return false;
+                return false;              
             }
             let productOptions = [];
             this.selectedOptionContainer.querySelectorAll('.option-value').forEach(optionValue => {
@@ -539,18 +539,18 @@ const initProduct = () => {
                 mediaElement.remove();
             }
             document.querySelectorAll('.product-media').forEach((element, index) => {
-                element.querySelector('.media-index').innerHTML = index + 1;
-                element.querySelector('.input-media-position').value = index + 1;
+                element.querySelector('.media-index').innerHTML = index+1;
+                element.querySelector('.input-media-position').value = index+1;
             });
         });
     };
     productMediaHandler();
     document.querySelector('.open-media-library-modal').onclick = event => {
         event.preventDefault();
-        openMediaLibrary({
-            multiSelect: true,
+        openMediaLibrary({ 
+            multiSelect: true, 
             buttonText: 'Add',
-            onSave: function (media) {
+            onSave: function(media) {
                 if (media && document.querySelector('.no-images-msg')) {
                     document.querySelector('.no-images-msg').remove();
                 }
@@ -558,7 +558,7 @@ const initProduct = () => {
                     let index = document.querySelectorAll('.product-media').length;
                     document.querySelector('.product-media-container').insertAdjacentHTML('beforeend', `
                         <div class="product-media">
-                            <span class="media-index responsive-hidden">${index + 1}</span>
+                            <span class="media-index responsive-hidden">${index+1}</span>
                             <a class="media-img" href="../${m.full_path}" target="_blank">
                                 <img src="../${m.full_path}">
                             </a>
@@ -573,7 +573,7 @@ const initProduct = () => {
                             </div>
                             <input type="hidden" class="input-media-id" name="media[]" value="${m.id}">
                             <input type="hidden" class="input-media-product-id" name="media_product_id[]" value="0">
-                            <input type="hidden" class="input-media-position" name="media_position[]" value="${index + 1}">
+                            <input type="hidden" class="input-media-position" name="media_position[]" value="${index+1}">
                         </div>                    
                     `);
                 });
@@ -609,11 +609,11 @@ const initProduct = () => {
                         required: optionValue.querySelector('.input-option-required').value
                     });
                 });
-                openOptionsModal({
+                openOptionsModal({ 
                     buttonText: 'Save',
                     reservedTitles: [...document.querySelectorAll('.product-option')].map(option => option.querySelector('.input-option-title').value.toLowerCase()),
                     options: options,
-                    onSave: function (options) {
+                    onSave: function(options) {
                         if (options.length > 0) {
                             let optionsHtml = '';
                             let optionsValuesHtml = '';
@@ -651,21 +651,21 @@ const initProduct = () => {
                         }
                         productOptionsHandler();
                     }
-                });
+                });    
             }
             document.querySelectorAll('.product-option').forEach((element, index) => {
-                element.querySelector('.option-index').innerHTML = index + 1;
-                element.querySelectorAll('.input-option-position').forEach(input => input.value = index + 1);
+                element.querySelector('.option-index').innerHTML = index+1;
+                element.querySelectorAll('.input-option-position').forEach(input => input.value = index+1);
             });
         });
     };
     productOptionsHandler();
     document.querySelector('.open-options-modal').onclick = event => {
         event.preventDefault();
-        openOptionsModal({
+        openOptionsModal({ 
             buttonText: 'Add',
             reservedTitles: [...document.querySelectorAll('.product-option')].map(option => option.querySelector('.input-option-title').value.toLowerCase()),
-            onSave: function (options) {
+            onSave: function(options) {
                 if (options.length > 0) {
                     if (document.querySelector('.no-options-msg')) {
                         document.querySelector('.no-options-msg').remove();
@@ -685,14 +685,14 @@ const initProduct = () => {
                             <input type="hidden" class="input-option-weight-modifier" name="option_weight_modifier[]" value="${option.weight_modifier}">
                             <input type="hidden" class="input-option-type" name="option_type[]" value="${option.type}">
                             <input type="hidden" class="input-option-required" name="option_required[]" value="${option.required}">
-                            <input type="hidden" class="input-option-position" name="option_position[]" value="${index + 1}">
+                            <input type="hidden" class="input-option-position" name="option_position[]" value="${index+1}">
                         </div>                   
                         `;
                         optionsValuesHtml += option.name + ', ';
                     })
                     document.querySelector('.product-options-container').insertAdjacentHTML('beforeend', `
                     <div class="product-option">                 
-                        <span class="option-index responsive-hidden">${index + 1}</span>
+                        <span class="option-index responsive-hidden">${index+1}</span>
                         <div class="option-text">
                             <h3>${options[0].title} (${options[0].type})</h3>
                             <p>${optionsValuesHtml.replace(/, $/, '')}</p>
@@ -709,7 +709,7 @@ const initProduct = () => {
                 }
                 productOptionsHandler();
             }
-        });
+        });  
     };
     let productDownloadsHandler = () => {
         document.querySelectorAll('.download-position i').forEach(element => element.onclick = event => {
@@ -725,8 +725,8 @@ const initProduct = () => {
                 downloadElement.remove();
             }
             document.querySelectorAll('.product-download').forEach((element, index) => {
-                element.querySelector('.download-index').innerHTML = index + 1;
-                element.querySelector('.input-download-position').value = index + 1;
+                element.querySelector('.download-index').innerHTML = index+1;
+                element.querySelector('.input-download-position').value = index+1;
             });
         });
     };
@@ -735,7 +735,7 @@ const initProduct = () => {
         event.preventDefault();
         modal({
             state: 'open',
-            modalTemplate: function () {
+            modalTemplate: function() {
                 return `
                 <div class="dialog downloads-modal">
                     <div class="content">
@@ -753,7 +753,7 @@ const initProduct = () => {
                 </div>
                 `;
             },
-            onOpen: function () {
+            onOpen: function() {
                 this.element.querySelector('.download-file-path').onchange = () => {
                     fetch('index.php?page=api&action=fileexists&path=' + this.element.querySelector('.download-file-path').value, { cache: 'no-store' }).then(response => response.json()).then(data => {
                         this.element.querySelector('.download-result').innerHTML = data.result;
@@ -765,7 +765,7 @@ const initProduct = () => {
                     });
                 };
             },
-            onClose: function (event) {
+            onClose: function(event) {
                 if (event && event.button && event.button.classList.contains('save')) {
                     if (event.button.classList.contains('disabled')) return false;
                     if (document.querySelector('.no-downloads-msg')) {
@@ -775,7 +775,7 @@ const initProduct = () => {
                     let file_path = document.querySelector('.download-file-path').value;
                     document.querySelector('.product-downloads-container').insertAdjacentHTML('beforeend', `
                         <div class="product-download">
-                            <span class="download-index responsive-hidden">${index + 1}</span>
+                            <span class="download-index responsive-hidden">${index+1}</span>
                             <div class="download-text">
                                 <h3 class="responsive-hidden">${file_path}</h3>
                                 <p class="responsive-hidden"></p>
@@ -786,13 +786,13 @@ const initProduct = () => {
                                 <i class="fas fa-arrow-down move-down"></i>
                             </div>
                             <input type="hidden" class="input-download-file-path" name="download_file_path[]" value="${file_path}">
-                            <input type="hidden" class="input-download-position" name="download_position[]" value="${index + 1}">
+                            <input type="hidden" class="input-download-position" name="download_position[]" value="${index+1}">
                         </div>                    
-                    `);
+                    `);                                      
                     productDownloadsHandler();
                 }
             }
-        });
+        });        
     };
 };
 const initMedia = () => {
@@ -801,7 +801,7 @@ const initMedia = () => {
             event.preventDefault();
             modal({
                 state: 'open',
-                modalTemplate: function () {
+                modalTemplate: function() {
                     return `
                     <div class="dialog edit-media-modal">
                         <div class="content">
@@ -827,7 +827,7 @@ const initMedia = () => {
                     </div>
                     `;
                 },
-                onClose: function (event) {
+                onClose: function(event) {
                     let mediaDetailsForm = this.element.querySelector('.media-details-form');
                     if (event && event.button && event.button.classList.contains('save')) {
                         fetch(mediaDetailsForm.action, {
@@ -842,13 +842,13 @@ const initMedia = () => {
                                     element.dataset.dateUploaded = media.dateUploaded;
                                 }
                             });
-                        });
+                        });                    
                     }
                     if (event && event.button && event.button.classList.contains('delete')) {
-                        fetch(mediaDetailsForm.action + '&delete=true').then(response => response.json()).then(() => element.remove());
+                        fetch(mediaDetailsForm.action + '&delete=true').then(response => response.json()).then(() => element.remove());                    
                     }
                 }
-            });
+            });        
         });
     };
     mediaHandler();
@@ -858,7 +858,7 @@ const initMedia = () => {
         input.type = 'file';
         input.multiple = 'multiple';
         input.accept = 'image/*';
-        input.onchange = event => {
+        input.onchange = event => { 
             document.querySelector('.upload').innerHTML = '<div class="loader"></div>';
             let total_files = event.target.files.length;
             let form = new FormData();
@@ -872,7 +872,7 @@ const initMedia = () => {
             }).then(response => response.json()).then(data => {
                 if (data) {
                     data.forEach((media, index) => {
-                        if (index > total_files - 1) return;
+                        if (index > total_files-1) return;
                         document.querySelector('.media').insertAdjacentHTML('afterbegin', `
                         <a href="#" class="image" data-id="${media.id}" data-title="${media.title}" data-caption="${media.caption}" data-date-uploaded="${media.date_uploaded.replace(' ', 'T')}" data-full-path="${media.full_path}">
                             <img src="../${media.full_path}" alt="${media.caption}" loading="lazy">
@@ -885,7 +885,7 @@ const initMedia = () => {
             });
         };
         input.click();
-    };
+    }; 
 };
 const initManageOrder = (products) => {
     document.querySelector('.add-item').onclick = event => {

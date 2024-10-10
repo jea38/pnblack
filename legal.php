@@ -1,12 +1,12 @@
 <?php
 // Prevent direct access to file
 defined('pnblack') or exit;
-$site_name = site_name;
+
 ?>
 <?=template_header('Legal')?>
 
 <section id="landing-section">
-          <img loading="lazy" class="column_1 user-select-none pe-none" src="https://i.pinimg.com/736x/04/2f/f4/042ff44fb9c5733c61667685e2455904.jpg" alt="" />
+          <img loading="lazy" class="column_1 user-select-none pe-none" src="shared/featured-image.jpg" alt="" />
           <div class="column_2">
             <div></div>
             <div class="column_2b">

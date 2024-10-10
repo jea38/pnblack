@@ -112,7 +112,7 @@
                     <tr>
                         <td style="text-align:center;">
                             <a href="https://pnblack.com" title="logo" target="_blank">
-                                <img width="150" src="http://192.168.1.132/pnblack/shared/pnbf22.png" title="logo" alt="logo">
+                                <img width="150" src="https://pnblack.com/shared/pnbf22.png" title="logo" alt="logo">
                             </a>
                         </td>
                     </tr>
@@ -141,7 +141,7 @@
                                         </p>
 
                                         <p style="text-align: left;">
-                                            <a href="http://localhost/pxh/pnblack/index.php?page=myaccount"
+                                            <a href="https://pnblack.com/myaccount"
                                                style="background: #bf5fff; text-decoration: none !important; font-weight: 500; margin-top: 25px; color: #fff; text-transform: uppercase; font-size: 14px; padding: 10px 24px; display: inline-block; border-radius: 50px;">
                                                 The website
                                             </a>

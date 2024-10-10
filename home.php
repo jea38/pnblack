@@ -20,7 +20,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </script>
 
 <section id="landing-section">
-          <img loading="lazy" class="column_1 user-select-none pe-none" src="https://i.pinimg.com/736x/04/2f/f4/042ff44fb9c5733c61667685e2455904.jpg" alt="" />
+          <img loading="lazy" class="column_1 user-select-none pe-none" src="shared/featured-image.jpg" alt="" />
           <div class="column_2">
             <div></div>
             <div class="column_2b">
@@ -42,7 +42,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             Discover convenience, personalized service, and an exceptional journey with us.   
             </p><br>
 
-            <a href="pnblack/index.php?page=products"><button class="click-me"><h3> Get Started</h3></button></a>
+            <a href="<?=url('index.php?page=products')?>"><button class="click-me"><h3> Get Started</h3></button></a>
           </div>
           <div class="column_2">
             <div class="work-cont">
@@ -68,7 +68,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       
         <section id="section-3">
         <div class="img-cont ">
-            <img class="user-select-none pe-none" src="https://pnblack.azurewebsites.net/shared/globe.gif" alt=""  />
+            <img class="user-select-none pe-none" src="shared/globe.gif" alt=""  />
           </div>
           <div class="container py-5">
             <div class="title flow">
@@ -133,7 +133,7 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <section id="newsletter">
           <div class="column_1 flow">
             <div class="container py-3">
-              <h3>Logo designed by Paige Frias.</h3>
+              <h3>Logo designed by <a style="font-size: var(--fs-3);color:var(--clr-pri-400);background:var(--clr-dark); border-radius: 5px; padding: 5px;" href="https://www.instagram.com/pfpaints_/?igshid=OGQ5ZDc2ODk2ZA%3D%3D">Paige Frias</a></h3>
             </div>
           </div>
         </section>

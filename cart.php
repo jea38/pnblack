@@ -68,7 +68,7 @@ if ($products_in_cart) {
 <?=template_header('Cart')?>
 
 <section id="landing-section">
-          <img loading="lazy" class="column_1 user-select-none pe-none" src="https://i.pinimg.com/736x/04/2f/f4/042ff44fb9c5733c61667685e2455904.jpg" alt="" />
+          <img loading="lazy" class="column_1 user-select-none pe-none" src="shared/featured-image.jpg" alt="" />
           <div class="column_2">
             <div></div>
             <div class="column_2b">
@@ -79,7 +79,7 @@ if ($products_in_cart) {
         </section>
 
 
-            <a href="index.php?page=products">
+            <a href="<?=url('index.php?page=products')?>">
                   <button class="button-colordot bcalt">                 
                             <span><i class='fas fa-angle-double-left'></i>SHOP</span>
                         </button>

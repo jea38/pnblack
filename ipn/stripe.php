@@ -1,19 +1,18 @@
 <?php
-define('shoppingcart', true);
+define('pnblack', true);
 include '../config.php';
 include '../functions.php';
 // Include stripe lib
 require_once('../lib/stripe/init.php');
 \Stripe\Stripe::setApiKey(stripe_secret_key);
-if (!isset($_GET['key'], $_SERVER['HTTP_STRIPE_SIGNATURE'])) {
-    exit('No key and/or signature specified!');
+if (!isset($_SERVER['HTTP_STRIPE_SIGNATURE'])) {
+    exit('No signature specified!');
 }
-$endpoint_secret = $_GET['key'];
 $payload = @file_get_contents('php://input');
 $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
 $event = null;
 try {
-    $event = \Stripe\Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
+    $event = \Stripe\Webhook::constructEvent($payload, $sig_header, stripe_webhook_secret);
 } catch(\UnexpectedValueException $e) {
     http_response_code(400);
     exit;

@@ -4,12 +4,12 @@ require_once 'header.php';
 ?>
 
 <section id="landing-section">
-          <img loading="lazy" class="column_1 user-select-none pe-none" src="https://i.pinimg.com/736x/04/2f/f4/042ff44fb9c5733c61667685e2455904.jpg" alt="" />
+          <img loading="lazy" class="column_1 user-select-none pe-none" src="https://pnblack.com/shared/featured-image.jpg" alt="" />
           <div class="column_2">
             <div></div>
             <div class="column_2b">
               <h1 class="d3">
-                <b style="color: var();"><?="$site_name"?></b>  <span class='typewriter-text' data-text='[ "Info 📰.", "FAQs ❓." ]'></span>
+                <b style="color: var();">PnBlack</b>  <span class='typewriter-text' data-text='[ "Info 📰.", "FAQs ❓." ]'></span>
             </h1>
               <div>
                     <form class="credentials-box" action="search.php" method="GET">

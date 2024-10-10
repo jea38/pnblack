@@ -17,7 +17,7 @@ if (isset($_SESSION['discount'])) {
 <?php else: ?>
 
     <section id="landing-section">
-    <img loading="lazy" class="column_1 user-select-none pe-none" src="https://i.pinimg.com/736x/04/2f/f4/042ff44fb9c5733c61667685e2455904.jpg" alt="" />
+    <img loading="lazy" class="column_1 user-select-none pe-none" src="https://pnblack.com/shared/featured-image.jpg" alt="" />
 
           <div class="column_2">
           <h1 class="d3">PnBlack </h1>            
@@ -28,7 +28,7 @@ if (isset($_SESSION['discount'])) {
 
             <div class="placeorder">
     <h4>Order placed. Thank you for shopping! We'll email your order details.</h4>
-    <a href='index.php?page=products'><button class='button-colordot'><span>CONTINUE</span></button></a>
+    <a href='<?=url('index.php?page=products')?>'><button class='button-colordot'><span>CONTINUE</span></button></a>
 </div>
             </div>
           </div>

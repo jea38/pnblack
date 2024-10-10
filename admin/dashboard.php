@@ -5,9 +5,9 @@ $stmt = $pdo->prepare('SELECT t.*, COUNT(ti.id) AS total_products FROM transacti
 $stmt->execute();
 $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // Get the orders statistics
-$stmt = $pdo->prepare('SELECT SUM(payment_amount) AS earnings FROM transactions WHERE cast(created as DATE) = cast(now() as DATE)');
+$stmt = $pdo->prepare('SELECT SUM(payment_amount) AS earnings FROM transactions WHERE payment_status = "Completed" AND cast(created as DATE) = cast(now() as DATE)');
 $stmt->execute();
-$order_stats = $stmt->fetch(PDO::FETCH_ASSOC);;
+$order_stats = $stmt->fetch(PDO::FETCH_ASSOC);
 // Get the total number of accounts
 $stmt = $pdo->prepare('SELECT COUNT(*) AS total FROM accounts');
 $stmt->execute();
@@ -19,7 +19,6 @@ $products = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 <?=template_admin_header('Dashboard', 'dashboard')?>
 
-
 <div class="content-title">
     <div class="title">
         <i class="fa-solid fa-gauge-high"></i>
@@ -29,7 +28,6 @@ $products = $stmt->fetch(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>
-
 
 <div class="dashboard">
     <div class="content-block stat">
@@ -117,7 +115,7 @@ $products = $stmt->fetch(PDO::FETCH_ASSOC);
                     <td class="responsive-hidden"><?=$order['total_products']?></td>
                     <td><?=currency_code?><?=number_format($order['payment_amount'], 2)?></td>
                     <td class="responsive-hidden"><?=$order['payment_method']?></td>
-                    <td class="responsive-hidden"><?=$order['payment_status']?></td>
+                    <td class="responsive-hidden"><span class="status <?=strtolower($order['payment_status'])?>"><?=$order['payment_status']?></span></td>
                     <td class="responsive-hidden"><?=date('F j, Y', strtotime($order['created']))?></td>
                     <td><a href="index.php?page=order&id=<?=$order['id']?>" class="link1">View</a> <a href="index.php?page=order_manage&id=<?=$order['id']?>" class="link1">Edit</a></td>
                 </tr>

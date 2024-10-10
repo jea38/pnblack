@@ -2,10 +2,10 @@
 ob_start();
 session_start();
 
-$dbhost 	= "localhost";
-$dbuser 	= "root";
-$dbpass 	= "";
-$dbname 	= "opnblack";
+$dbhost 	= "vuxmysql14";
+$dbuser 	= "pnblack";
+$dbpass 	= "Ascpoi2309#";
+$dbname 	= "pnblack";
 $charset 	= "utf8";
 
 $dbcon = mysqli_connect($dbhost, $dbuser, $dbpass);

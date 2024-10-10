@@ -22,64 +22,6 @@ if (isset($_GET['delete'])) {
 if (!$order) {
     exit('Invalid ID!');
 }
-
-
-
-if (isset($_POST['tracking_submit'])) {
-    // Sending Tracking Number
-    $email = $_POST['email'];
-    $carrier = $_POST['carrier'];
-    $tracking_number = $_POST['tracking_number'];
-
-    // Check if any field is empty
-    if (empty($email) || empty($carrier) || empty($tracking_number)) {
-        echo "All fields are required";
-    } else {
-        if (!mail_enabled) {
-            return;
-        }
-
-        $subject = 'Order Update';
-        $headers = 'From: ' . mail_from . "\r\n" . 'Reply-To: ' . mail_from . "\r\n" . 'Return-Path: ' . mail_from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
-        ob_start();
-        include 'orderupdate.php';
-        $orderupdate = ob_get_clean();
-        
-        if (mail($email, $subject, $orderupdate, $headers)) {
-            echo "Your mail was successfully sent to $email";
-        } else {
-            echo "Failed to send mail";
-        }
-    }
-}
-
-
-
-if (isset($_POST['ordercm_submit'])) {
-    // Sending Tracking Number
-    $completedmail = $_POST['completedmail'];
-
-    // Check if any field is empty
-    if (empty($completedmail)) {
-        echo "All fields are required";
-    } else {
-        if (!mail_enabled) {
-            return;
-        }
-
-        $subject = 'Order Completed';
-        $headers = 'From: ' . mail_from . "\r\n" . 'Reply-To: ' . mail_from . "\r\n" . 'Return-Path: ' . mail_from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
-        ob_start();
-        include 'ordercompleted.php';
-        $ordercompleted = ob_get_clean();
-        
-        if (mail($completedmail, $subject, $ordercompleted, $headers)) {
-            echo "Your mail was successfully sent to $email";
-        } else {
-            echo "Failed to send mail";
-        }
-    }
-}
 ?>
 <?=template_admin_header('Orders', 'orders')?>
 
@@ -125,18 +67,6 @@ if (isset($_POST['ordercm_submit'])) {
         <div class="order-detail">
             <h3>Discount Code</h3>
             <p><?=htmlspecialchars($order['discount_code'], ENT_QUOTES)?></p>
-        </div>
-        <?php endif; ?>
-                <?php if ($order['tracking_number']): ?>
-        <div class="order-detail">
-            <h3>Tracking Number</h3>
-            <p><?=htmlspecialchars($order['tracking_number'], ENT_QUOTES)?></p>
-        </div>
-        <?php endif; ?>
-        <?php if ($order['carrier']): ?>
-        <div class="order-detail">
-            <h3>Carrier</h3>
-            <p><?=htmlspecialchars($order['carrier'], ENT_QUOTES)?></p>
         </div>
         <?php endif; ?>
     </div>
@@ -242,50 +172,5 @@ if (isset($_POST['ordercm_submit'])) {
         </table>
     </div>
 </div>
-
-
-<div class="content-block-wrapper">
-    <div class="content-block order-details">
-        <div class="block-header">
-            <i class="fa-solid fa-user fa-sm"></i>Order Update Mail
-        </div>
-        
-<form action="" method="post">
-        <a href="index.php?page=orders" class="btn alt mar-right-2">Cancel</a>
-        <input type="submit" name="tracking_submit" value="Send" class="btn">
-
-        <div class="form responsive-width-100">
-            <label for="email"><i class="required">*</i> Customer Email</label>
-            <input id="email" type="email" name="email" placeholder="test@mail.com" value="<?=htmlspecialchars($order['email'], ENT_QUOTES)?>" required>
-
-            <label for="amount"><i class="required">*</i>Carrier</label>
-            <input id="amount" type="text" name="carrier" placeholder="Carrier" value="<?=htmlspecialchars($order['carrier'], ENT_QUOTES)?>" required>
-            
-            <label for="amount"><i class="required">*</i> Tracking Number</label>
-            <input id="amount" type="text" name="tracking_number" placeholder="Tracking Number" value="<?=htmlspecialchars($order['tracking_number'], ENT_QUOTES)?>" required>
-
-            </div>
-</form>
-
-    </div>
-
-
-        <div class="content-block order-details">
-        <div class="block-header">
-            <i class="fa-solid fa-user fa-sm"></i>Order Completed Mail
-        </div>
-      <form action="" method="post">
-        <a href="index.php?page=orders" class="btn alt mar-right-2">Cancel</a>
-        <input type="submit" name="ordercm_submit" value="Send" class="btn">
-
-        <div class="form responsive-width-100">
-            <label for="email"><i class="required">*</i> Customer Email</label>
-            <input id="email" type="email" name="completedmail" placeholder="test@mail.com" value="<?=htmlspecialchars($order['email'], ENT_QUOTES)?>" required>
-
-            </div>
-</form>
-    </div>
-
-    </div>
 
 <?=template_admin_footer()?>

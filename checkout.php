@@ -1,4 +1,10 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+?>
+
+<?php
 // Prevent direct access to file
 defined('pnblack') or exit;
 // Default values for the input form elements
@@ -38,6 +44,7 @@ $subtotal = 0.00;
 $shippingtotal = 0.00;
 $discounttotal = 0.00;
 $taxtotal = 0.00;
+$weighttotal = 0;
 $selected_country = isset($_POST['address_country']) ? $_POST['address_country'] : $account['address_country'];
 $selected_shipping_method = isset($_POST['shipping_method']) ? $_POST['shipping_method'] : null;
 $selected_shipping_method_name = '';
@@ -72,44 +79,78 @@ if ($products_in_cart) {
     foreach ($products_in_cart as &$cart_product) {
         foreach ($products as $product) {
             if ($cart_product['id'] == $product['id']) {
-                $cart_product['meta'] = $product;
-                $product_weight = $cart_product['options_weight'];
-                // Calculate the subtotal
-                $product_price = (float)$cart_product['options_price'];
-                $subtotal += $product_price * (int)$cart_product['quantity'];
-                // Calculate the final price, which includes tax
-                $cart_product['final_price'] = $product_price + (($tax_rate / 100) * $product_price);
-                $taxtotal += (($tax_rate / 100) * $product_price) * (int)$cart_product['quantity'];
-                // Calculate the shipping
-                foreach ($shipping_methods as $shipping_method) {
-                    if (empty($shipping_method['countries']) || in_array($selected_country, explode(',', $shipping_method['countries']))) {
-                        if ($shipping_method['id'] == $selected_shipping_method && $product_price >= $shipping_method['price_from'] && $product_price <= $shipping_method['price_to'] && $product_weight >= $shipping_method['weight_from'] && $product_weight <= $shipping_method['weight_to']) {
-                            if ($shipping_method['type'] == 'Single Product') {
-                                $cart_product['shipping_price'] += (float)$shipping_method['price'] * (int)$cart_product['quantity'];
-                                $shippingtotal += $cart_product['shipping_price'];
-                            } else {
-                                $cart_product['shipping_price'] = (float)$shipping_method['price'] / count($products_in_cart);
-                                $shippingtotal = (float)$shipping_method['price'];
+                // If product no longer in stock, prepare for removal
+                if ((int)$product['quantity'] === 0) {
+                    $cart_product['remove'] = 1;
+                } else {
+                    $cart_product['meta'] = $product;
+                    // Prevent the cart quantity exceeding the product quantity
+                    $cart_product['quantity'] = $cart_product['quantity'] > $product['quantity'] && $product['quantity'] !== -1 ? $product['quantity'] : $cart_product['quantity'];
+                    $product_weight = $cart_product['options_weight'];
+                    $weighttotal += $product_weight;
+                    // Calculate the subtotal
+                    $product_price = (float)$cart_product['options_price'];
+                    $subtotal += $product_price * (int)$cart_product['quantity'];
+                    // Calculate the final price, which includes tax
+                    $cart_product['final_price'] = $product_price + (($tax_rate / 100) * $product_price);
+                    $taxtotal += (($tax_rate / 100) * $product_price) * (int)$cart_product['quantity'];
+                    // Check which products are eligible for a discount
+                    if (isset($discount) && $discount && $current_date >= strtotime($discount['start_date']) && $current_date <= strtotime($discount['end_date'])) {
+                        // Check whether product list is empty or if product id is whitelisted
+                        if (empty($discount['product_ids']) || in_array($product['id'], explode(',', $discount['product_ids']))) {
+                            // Check whether category list is empty or if category id is whitelisted
+                            if (empty($discount['category_ids']) || array_intersect(explode(',', $product['categories']), explode(',', $discount['category_ids']))) {
+                                $cart_product['discounted'] = true;
                             }
-                            $shipping_methods_available[] = $shipping_method['id'];
-                        } else if ($product_price >= $shipping_method['price_from'] && $product_price <= $shipping_method['price_to'] && $product_weight >= $shipping_method['weight_from'] && $product_weight <= $shipping_method['weight_to']) {
-                            $shipping_methods_available[] = $shipping_method['id'];
-                        }
-                    }
-                    if ($shipping_method['id'] == $selected_shipping_method) {
-                        $selected_shipping_method_name = $shipping_method['name'];
-                    }
-                }
-                // Check which products are eligible for a discount
-                if (isset($discount) && $discount && $current_date >= strtotime($discount['start_date']) && $current_date <= strtotime($discount['end_date'])) {
-                    // Check whether product list is empty or if product id is whitelisted
-                    if (empty($discount['product_ids']) || in_array($product['id'], explode(',', $discount['product_ids']))) {
-                        // Check whether category list is empty or if category id is whitelisted
-                        if (empty($discount['category_ids']) || array_intersect(explode(',', $product['categories']), explode(',', $discount['category_ids']))) {
-                            $cart_product['discounted'] = true;
                         }
                     }
                 }
+            }
+        }
+    }
+    // Remove products that are out of stock
+    for ($i = 0; $i < count($products_in_cart); $i++) {
+        if (isset($products_in_cart[$i]['remove'])) {
+            unset($_SESSION['cart'][$i]);
+            unset($products_in_cart[$i]);
+        }
+    }
+    $_SESSION['cart'] = array_values($_SESSION['cart']);
+    $products_in_cart = array_values($products_in_cart);
+    // Redirect the user if the shopping cart is empty
+    if (empty($products_in_cart)) {
+        header('Location: ' . url('index.php?page=cart'));
+        exit;
+    }
+    // Calculate the shipping
+    foreach ($products_in_cart as &$cart_product) {
+        foreach ($shipping_methods as $shipping_method) {
+            // Product weight
+            $product_weight = $cart_product['options_weight'] ? $cart_product['options_weight'] : $weighttotal;
+            // Determine the price
+            $product_price = $shipping_method['type'] == 'Single Product' ? (float)$cart_product['options_price'] : $subtotal;
+            // Check if no country required or if shipping method only available in specified countries
+            if (empty($shipping_method['countries']) || in_array($selected_country, explode(',', $shipping_method['countries']))) {
+                // Compare the price and weight to meet shipping method requirements
+                if ($shipping_method['id'] == $selected_shipping_method && $product_price >= $shipping_method['price_from'] && $product_price <= $shipping_method['price_to'] && $product_weight >= $shipping_method['weight_from'] && $product_weight <= $shipping_method['weight_to']) {
+                    if ($shipping_method['type'] == 'Single Product') {
+                        // Calculate single product price
+                        $cart_product['shipping_price'] += (float)$shipping_method['price'] * (int)$cart_product['quantity'];
+                        $shippingtotal += $cart_product['shipping_price'];
+                    } else {
+                        // Calculate entire order price
+                        $cart_product['shipping_price'] = (float)$shipping_method['price'] / count($products_in_cart);
+                        $shippingtotal = (float)$shipping_method['price'];
+                    }
+                    $shipping_methods_available[] = $shipping_method['id'];
+                } else if ($product_price >= $shipping_method['price_from'] && $product_price <= $shipping_method['price_to'] && $product_weight >= $shipping_method['weight_from'] && $product_weight <= $shipping_method['weight_to']) {
+                    // No method selected, so store all methods available
+                    $shipping_methods_available[] = $shipping_method['id'];
+                }
+            }
+            // Update selected shipping method name
+            if ($shipping_method['id'] == $selected_shipping_method) {
+                $selected_shipping_method_name = $shipping_method['name'];
             }
         }
     }
@@ -186,7 +227,7 @@ if (isset($_POST['method'], $_POST['first_name'], $_POST['last_name'], $_POST['a
                     'quantity' => $products_in_cart[$i]['quantity'],
                     'price_data' => [
                         'currency' => stripe_currency,
-                        'unit_amount' => (float)$products_in_cart[$i]['final_price'] * 100,
+                        'unit_amount' => round((float)$products_in_cart[$i]['final_price'] * 100),
                         'product_data' => [
                             'name' => $products_in_cart[$i]['meta']['name'],
                             'metadata' => [
@@ -203,7 +244,7 @@ if (isset($_POST['method'], $_POST['first_name'], $_POST['last_name'], $_POST['a
                 'quantity' => 1,
                 'price_data' => [
                     'currency' => stripe_currency,
-                    'unit_amount' => $shippingtotal*100,
+                    'unit_amount' => round($shippingtotal*100),
                     'product_data' => [
                         'name' => 'Shipping',
                         'description' => $selected_shipping_method_name,
@@ -214,28 +255,31 @@ if (isset($_POST['method'], $_POST['first_name'], $_POST['last_name'], $_POST['a
                     ]
                 ]
             ];
-            // Webhook that will notify the stripe IPN file when a payment has been made
-            $webhooks = $stripe->webhookEndpoints->all();
-            $webhook = null;
-            $secret = '';
-            foreach ($webhooks as $wh) {
-                if ($wh['description'] == 'codeshack_shoppingcart_system') {
-                    $webhook = $wh;
-                    $secret = $webhook['metadata']['secret'];
+            // Check the webhook secret
+            if (empty(stripe_webhook_secret)) {
+                // No webhook secret, attempt to create one
+                // Get the config.php file contents
+                $contents = file_get_contents('config.php');
+                if ($contents) {
+                    // Attempt to create the webhook and get the secret
+                    $webhook = $stripe->webhookEndpoints->create([
+                        'url' => stripe_ipn_url,
+                        'description' => 'pnblack', // Feel free to change this
+                        'enabled_events' => ['checkout.session.completed']
+                    ]);
+                    $secret = $webhook['secret'];
+                    // Update the "stripe_webhook_secret" constant in the config.php file with the new secret
+                    $contents = preg_replace('/define\(\'stripe_webhook_secret\'\, ?(.*?)\)/s', 'define(\'stripe_webhook_secret\',\'' . $secret . '\')', $contents);
+                    if (!file_put_contents('config.php', $contents)) {
+                        // Could not write to config.php file
+                        exit('Failed to automatically assign the Stripe webhook secret! Please set it manually in the config.php file.');
+                    }
+                } else {
+                    // Could not open config.php file
+                    exit('Failed to automatically assign the Stripe webhook secret! Please set it manually in the config.php file.');
                 }
             }
-            if ($webhook == null) {
-                $webhook = $stripe->webhookEndpoints->create([
-                    'url' => stripe_ipn_url,
-                    'description' => 'codeshack_shoppingcart_system',
-                    'enabled_events' => ['checkout.session.completed'],
-                    'metadata' => ['secret' => '']
-                ]);
-                $secret = $webhook['secret'];
-                $stripe->webhookEndpoints->update($webhook['id'], ['metadata' => ['secret' => $secret] ]);
-            }
-            $stripe->webhookEndpoints->update($webhook['id'], ['url' => stripe_ipn_url . '?key=' . $secret]);
-            // Create the stripe checkout session and redirect the user
+            // Create the stripe checkout session and redirect the customer
             $session = $stripe->checkout->sessions->create([
                 'success_url' => stripe_return_url,
                 'cancel_url' => stripe_cancel_url,
@@ -477,7 +521,7 @@ for(var i = 0; i < productslink.length; i++){
 
                 <div class="payment-methods">
                     <?php if (pay_on_delivery_enabled): ?>
-                    <input id="payondelivery" type="radio" name="method" value="payondelivery" checked>
+                    <input id="payondelivery" type="radio" name="method" value="payondelivery">
                     <label for="payondelivery">Pay on Delivery</label>
                     <?php endif; ?>
 
@@ -487,7 +531,7 @@ for(var i = 0; i < productslink.length; i++){
                     <?php endif; ?>
 
                     <?php if (stripe_enabled): ?>
-                    <input id="stripe" type="radio" name="method" value="stripe">
+                    <input id="stripe" type="radio" name="method" value="stripe" checked>
                     <label for="stripe">CREDIT / DEBIT CARD</label>
                     <?php endif; ?>
                     
@@ -496,21 +540,6 @@ for(var i = 0; i < productslink.length; i++){
                     <label for="coinbase">CRYPTO</label>
                     <?php endif; ?>
                 </div>
-
-                <?php if (!isset($_SESSION['account_loggedin'])): ?>
-                <div class="credentials-box">
-                <h2>Create Account<?php if (!account_required): ?> (optional)<?php endif; ?></h2>
-
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="john@example.com" class="form-field">
-
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Password" class="form-field" autocomplete="new-password">
-
-                <label for="cpassword">Confirm Password</label>
-                <input type="password" name="cpassword" id="cpassword" placeholder="Confirm Password" class="form-field" autocomplete="new-password">
-                </div>
-                <?php endif; ?>
 
                 <h2>Shipping Details</h2>
                 <div class="credentials-box">
@@ -548,6 +577,22 @@ for(var i = 0; i < productslink.length; i++){
                 </select>
 
                     </div>
+
+                    <?php if (!isset($_SESSION['account_loggedin'])): ?>
+                <div class="credentials-box">
+                <h2>Create Account<?php if (!account_required): ?> (optional)<?php endif; ?></h2>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="john@example.com" class="form-field" required>
+
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" class="form-field" autocomplete="new-password">
+
+                <label for="cpassword">Confirm Password</label>
+                <input type="password" name="cpassword" id="cpassword" placeholder="Confirm Password" class="form-field" autocomplete="new-password">
+                </div>
+                <?php endif; ?>
+
             </div>
 
             <div class="cart-details">
@@ -580,15 +625,16 @@ for(var i = 0; i < productslink.length; i++){
                     </span>
                 </div>
 
-                <div class="shipping-methods-container">
+                
+                <div class="shipping-methods-container credentials-box">
+                <h2>Shipping</h2>
                     <?php if ($shipping_methods_available): ?>
                     <div class="shipping-methods">
-                        <h3>Shipping Method</h3>
                         <?php foreach($shipping_methods as $k => $method): ?>
                         <?php if (!in_array($method['id'], $shipping_methods_available)) continue; ?>
                         <div class="shipping-method radio-checkbox">                         
                           <label  for="sm<?=$k?>"><?=$method['name']?> (<?=currency_code?><?=number_format($method['price'], 2)?><?=$method['type']=='Single Product'?' per item':''?>)
-                        <input type="radio" class="ajax-update" id="sm<?=$k?>" name="shipping_method" value="<?=$method['id']?>" required<?=$selected_shipping_method==$method['id']?' checked':''?>>
+                        <input type="radio"  class="ajax-update" id="sm<?=$k?>" name="shipping_method" value="<?=$method['id']?>" required<?=$selected_shipping_method==$method['id']?' checked':''?>>
                             <span class="rdo"></span>
                             <span><p></p></span>
                           </label>

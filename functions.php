@@ -72,7 +72,7 @@ $products_link = url('index.php?page=products');
 $myaccount_link = url('index.php?page=myaccount');
 $cart_link = url('index.php?page=cart');
 $admin_link = isset($_SESSION['account_loggedin'], $_SESSION['account_role']) && $_SESSION['account_role'] == 'Admin' ? '<a href="' . base_url . 'admin/index.php" target="_blank">Admin</a>' : '';
-$logout_link = isset($_SESSION['account_loggedin']) ? '<li><a style="color:var(--clr-sec-400);" href="index.php?page=logout"><div class="svg-space" ><svg  style="fill:var(--clr-sec-400);" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 700 700" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g><g><path d="M336.709,74.843c-10.322-3.944-21.88,1.219-25.825,11.537c-3.945,10.316,1.22,21.879,11.536,25.824 C393.115,139.239,442,207.384,442,286c0,102.561-83.439,186-186,186S70,388.561,70,286c0-78.659,48.908-146.766,119.573-173.793 c10.317-3.946,15.481-15.509,11.536-25.825c-3.947-10.317-15.512-15.48-25.825-11.536C89.185,107.777,30,190.692,30,286  c0,124.922,101.09,226,226,226c124.922,0,226-101.09,226-226C482,190.65,422.778,107.759,336.709,74.843z" /></g></g><g><g><path d="M256,0c-11.046,0-20,8.954-20,20v195.851c0,11.046,8.954,20,20,20s20-8.955,20-20V20C276,8.954,267.046,0,256,0z" /></g></g></svg></div>Sign Out</a></li>' : '';
+$logout_link = isset($_SESSION['account_loggedin']) ? '<li><a style="color:var(--clr-sec-400);" href="' . url('index.php?page=logout') . '"><div class="svg-space" ><svg  style="fill:var(--clr-sec-400);" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 700 700" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g><g><path d="M336.709,74.843c-10.322-3.944-21.88,1.219-25.825,11.537c-3.945,10.316,1.22,21.879,11.536,25.824 C393.115,139.239,442,207.384,442,286c0,102.561-83.439,186-186,186S70,388.561,70,286c0-78.659,48.908-146.766,119.573-173.793 c10.317-3.946,15.481-15.509,11.536-25.825c-3.947-10.317-15.512-15.48-25.825-11.536C89.185,107.777,30,190.692,30,286  c0,124.922,101.09,226,226,226c124.922,0,226-101.09,226-226C482,190.65,422.778,107.759,336.709,74.843z" /></g></g><g><g><path d="M256,0c-11.046,0-20,8.954-20,20v195.851c0,11.046,8.954,20,20,20s20-8.955,20-20V20C276,8.954,267.046,0,256,0z" /></g></g></svg></div>Sign Out</a></li>' : '';
 $site_name = site_name;
 $base_url = base_url;
 
@@ -83,44 +83,58 @@ $base_url = base_url;
 echo <<<EOT
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="profile" href="https://gmpg.org/xfn/11">
-    <title>$site_name</title>
-    <link rel="icon" type="image/png" href=" https://pnblack.azurewebsites.net/shared/pnbs.png">
-    <meta name="description" content=" ABC ABC ABC ABC ABC " />
-    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="google-site-verification" content="1Ar4sDsS4N8_Qg9vgkePTmoMmBxPWposl4A1QJ9mFsw" />
-    <meta name="msvalidate.01" content="1Ar4sDsS4N8_Qg9vgkePTmoMmBxPWposl4A1QJ9mFsw" />
-    <link rel="canonical" href="/" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:site_name" content="Website - #1 web &amp; site" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="PnBlack | #1 website | site.com  " />
-    <meta property="og:description" content=" ABC ABC ABC ABC ABC " />
-    <meta property="og:url" content="/" />
-    <meta property="fb:app_id" content="bluetowel" />
-    <meta property="og:image" content=" https://pnblack.azurewebsites.net/shared/pnbs.jpg" />
-    <meta property="og:image:secure_url" content=" https://pnblack.azurewebsites.net/shared/pnbs.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="PnBlack | #1 website | site.com  " />
-    <meta name="twitter:description" content=" ABC ABC ABC ABC ABC " />
-    <meta name="twitter:image" content=" https://pnblack.azurewebsites.net/shared/pnbs.jpg" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta name="x-apple-disable-message-reformatting">
     <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+    
+    <!-- Basic Information -->
+    <title>$title</title>
+   <link rel="icon" type="image/png" href="{$base_url}favicon.png">
+    <meta name="description" content="Discover a range of products and stay tuned for more.">
+
+    <!-- Robots Meta -->
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    
+    <!-- Verification -->
+    <meta name="google-site-verification" content="Your-Google-Verification-Code">
+    <meta name="msvalidate.01" content="Your-Bing-Verification-Code">
+    
+    <!-- Canonical Link -->
+    <link rel="canonical" href="{$base_url}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="$site_name">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="$site_name">
+    <meta property="og:description" content="Discover a range of products and stay tuned for more.">
+    <meta property="og:url" content="{$base_url}">
+    <meta property="fb:app_id" content="Your-Facebook-App-ID">
+    <meta property="og:image" content="https://pnblack.azurewebsites.net/shared/featured-image.jpg">
+    <meta property="og:image:secure_url" content="https://pnblack.azurewebsites.net/shared/featured-image.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="$site_name">
+    <meta name="twitter:description" content="Discover a range of products and stay tuned for more.">
+    <meta name="twitter:image" content="https://pnblack.azurewebsites.net/shared/featured-image.jpg">
+
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
-    <link rel='stylesheet' href='css/main.css'>
-    <link rel='stylesheet' href='css/pnblack.css'>
-    <link rel='stylesheet' href=' css/2.css'>
-    <link rel='stylesheet' href=' css/p_view.css'>
+    <link rel='stylesheet' href='{$base_url}css/main.css'>
+    <link rel='stylesheet' href='{$base_url}css/pnblack.css'>
+    <link rel='stylesheet' href='{$base_url}css/2.css'>
+    <link rel='stylesheet' href='{$base_url}css/p_view.css'>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.3.1/swiper-bundle.min.js'></script>
 
-    <meta http-equiv="refresh" content="4000;url=index.php?page=logout" />
+    <meta http-equiv="refresh" content="4000;url=https://pnblack.azurewebsites.net/logout" />
+
     $head
 </head>
 
@@ -128,7 +142,7 @@ echo <<<EOT
     <header>
         <nav class="container">
           <div id="nav-logo">
-            <img class="nlogo" src=" https://pnblack.azurewebsites.net/shared/pnbf22.png">
+            <img class="nlogo" src="{$base_url}shared/pnbf22.png">
           </div>
          
           <div class="hamburger">
@@ -175,7 +189,7 @@ echo <<<EOT
                                 </div>
                             </li>
                             <li class="fsmenu--list-element">
-                                <a href="info/inu.php">
+                                <a href="{$base_url}info/inu.php">
                                     <span>Info & Updates</span>
                                 </a>
                                 <div class="fsmenu--scrolling-text">
@@ -188,7 +202,7 @@ echo <<<EOT
                                 </div>
                             </li>
                             <li class="fsmenu--list-element">
-                                <a href="lvs/contact.php">
+                                <a href="{$base_url}lvs/contact.php">
                                     <span>Contact Us</span>
                                 </a>
                                 <div class="fsmenu--scrolling-text">
@@ -309,7 +323,7 @@ echo <<<EOT
         <section id="footer" class="line py-2">
           <div class="container">
             <div id="nav-logo">
-                <img class="nlogo" src=" https://pnblack.azurewebsites.net/shared/pnbf22.png">
+                <img class="nlogo" src="{$base_url}shared/pnbf22.png">
              <div class="social-icon">
                 <a href="#"><i class="fa-brands fa-telegram"></i></a>
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -320,7 +334,7 @@ echo <<<EOT
       
         </section>
         <h5 class="copy-tag py-2">Copyright &#169 
-        $year PnBlack. <a href="index.php?page=legal">All Rights Reserved.</a>
+        $year PnBlack. <a href="{$base_url}legal">All Rights Reserved.</a>
         </h5>
       </footer>
 
@@ -331,9 +345,9 @@ echo <<<EOT
 <script>
 const currency_code = "$currency_code", base_url = "$base_url", rewrite_url = $rewrite_url;
 </script>
-<script src=" script.js"></script>
-<script src=" js/p_view.js"></script>
-<script src=" js/main.js"></script>
+<script src="{$base_url}script.js"></script>
+<script src="{$base_url}js/p_view.js"></script>
+<script src="{$base_url}js/main.js"></script>
 
 </body>
 </html>
@@ -391,7 +405,7 @@ echo <<<EOT
 		<meta name="viewport" content="width=device-width,minimum-scale=1">
    <meta http-equiv="refresh" content="4000;url=index.php?page=logout" />
 		<title>$title</title>
-        <link rel="icon" type="image/png" href=" https://pnblack.azurewebsites.net/shared/pnbs.png">
+       <link rel="icon" type="image/png" href="{$base_url}favicon.png">
 		<link href="admin.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
 	</head>

@@ -6,7 +6,7 @@ $message = htmlspecialchars($_POST['message']);
 
 if(!empty($cemail) && !empty($message)){
   if(filter_var($cemail, FILTER_VALIDATE_EMAIL)){
-    $receiver = "support@site.com"; //enter that email address where you want to receive all messages
+    $receiver = "admin@pnblack.com"; //enter that email address where you want to receive all messages
     $subject = "From: $cname <$cemail>";
     $body = "Name: $cname\nEmail: $cemail\n\nMessage:\n$message\n\nRegards,\n$cname";
     $sender = "From: $cemail";

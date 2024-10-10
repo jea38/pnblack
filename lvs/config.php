@@ -1,12 +1,12 @@
 <?php
 // database hostname, you don't usually need to change this
-define('db_host','localhost');
+define('db_host','vuxmysql14');
 // database username
-define('db_user','root');
+define('db_user','pnblack');
 // database password
-define('db_pass','');
+define('db_pass','Ascpoi2309#');
 // database name
-define('db_name','opnblack');
+define('db_name','pnblack');
 // database charset, change this only if utf8 is not supported by your language
 define('db_charset','utf8');
 // Authentication required for guests

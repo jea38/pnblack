@@ -13,12 +13,12 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `address_state` varchar(100) NOT NULL,
   `address_zip` varchar(50) NOT NULL,
   `address_country` varchar(100) NOT NULL,
-    `code` mediumint(50) NOT NULL,
+  `code` mediumint(50) DEFAULT NULL,
   `registered` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-INSERT INTO `accounts` (`id`, `email`, `password`, `role`, `first_name`, `last_name`, `address_street`, `address_city`, `address_state`, `address_zip`, `address_country`, `registered`) VALUES (1, 'admin@website.com', '$2a$10$v0pdXGM.hdJNzt4bY58bh.KuzpLurnNr3w7mMdaY2M5afrooER.me', 'Admin', 'John', 'Doe', '98 High Street', 'New York', 'NY', '10001', 'United States', '2022-01-01 00:00:00');
+INSERT INTO `accounts` (`id`, `email`, `password`, `role`, `first_name`, `last_name`, `address_street`, `address_city`, `address_state`, `address_zip`, `address_country`, `registered`) VALUES (1, 'admin@pnblack.com', '$2a$10$v0pdXGM.hdJNzt4bY58bh.KuzpLurnNr3w7mMdaY2M5afrooER.me', 'Admin', 'John', 'Doe', '98 High Street', 'New York', 'NY', '10001', 'United States', '2022-01-01 00:00:00');
 
 
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `txn_id` varchar(255) NOT NULL,
   `payment_amount` decimal(7,2) NOT NULL,
   `payment_status` varchar(30) NOT NULL,
-  `created` datetime  NOT NULL,
+  `created` datetime NOT NULL,
   `payer_email` varchar(255) NOT NULL DEFAULT '',
   `first_name` varchar(100) NOT NULL DEFAULT '',
   `last_name` varchar(100) NOT NULL DEFAULT '',
@@ -160,8 +160,6 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `shipping_method` varchar(255) NOT NULL DEFAULT '',
   `shipping_amount` decimal(7,2) NOT NULL DEFAULT 0.00,
   `discount_code` varchar(50) NOT NULL DEFAULT '',
-  `carrier` varchar(50) NOT NULL DEFAULT '',
-  `tracking_number` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `txn_id` (`txn_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -176,9 +174,37 @@ CREATE TABLE IF NOT EXISTS `transactions_items` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+-- phpMyAdmin SQL Dump
+-- version 4.9.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Sep 19, 2021 at 05:56 PM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.3.11
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
-CREATE TABLE IF NOT EXISTS `admin` (
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `newblog`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -186,18 +212,32 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `admin`
+--
+
 INSERT INTO `admin` (`id`, `username`, `password`, `email`, `date`) VALUES
 (1, 'pnbeditor1', '$2a$10$v0pdXGM.hdJNzt4bY58bh.KuzpLurnNr3w7mMdaY2M5afrooER.me', 'admin@website.com', '2023-09-19 14:39:53');
 
+-- --------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `page` (
+--
+-- Table structure for table `page`
+--
+
+CREATE TABLE `page` (
   `id` int(11) NOT NULL,
   `page_name` varchar(255) DEFAULT NULL,
   `content` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `posts` (
+--
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -206,9 +246,64 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-
+--
+-- Dumping data for table `posts`
+--
 INSERT INTO `posts` (`id`, `title`, `description`, `slug`, `posted_by`, `date`) VALUES
-(1, 'We Launched Today', '<img src=\"https://i.pinimg.com/564x/eb/8e/a3/eb8ea3667bc8fc8bb801e25fe63eca8a.jpg\" alt=\"YB\"><p><strong>PnBlack</strong> launched today, have fun using our website and spread the word.</p>  ', 'we-launched-today', 'admin', '2023-07-06 21:40:55');
+(1, 'We Launched Today', '<img src=\"https://media.tenor.com/Cd7bYgbBbLQAAAAC/popping-bubbley-bubbles.gif" alt=\"Toast\"><p><strong>PnBlack</strong> launched today, have fun using our website and spread the word.</p>  ', 'we-launched-today', 'admin', '2023-09-20 21:40:55');
+
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `page`
+--
+ALTER TABLE `page`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `page_name` (`page_name`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `page`
+--
+ALTER TABLE `page`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 
 CREATE TABLE IF NOT EXISTS `lsaccounts` (
@@ -228,8 +323,8 @@ CREATE TABLE IF NOT EXISTS `lsaccounts` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 INSERT INTO `lsaccounts` (`id`, `email`, `password`, `full_name`, `role`, `secret`, `last_seen`, `status`, `photo_url`, `ip`, `user_agent`, `registered`) VALUES
-(1, 'support@website.com', '$2y$10$ZU7Jq5yZ1U/ifeJoJzvLbenjRyJVkSzmQKQc.X0KDPkfR3qs/iA7O', 'Admin', 'Admin', '', '2022-06-14 12:00:00', 'Idle', '', '', '', '2022-06-14 12:00:00'),
-(2, 'operator@website.com', '$2y$10$thE7hIJF/EJvKjmJy7hd5uH3a/BNgSUepkYoES0q80YEzi7VqWsRG', 'Operator', 'Operator', '', '2022-06-14 12:00:00', 'Idle', '', '', '', '2022-06-14 12:00:00');
+(1, 'admin@pnblack.com', '$2y$10$ZU7Jq5yZ1U/ifeJoJzvLbenjRyJVkSzmQKQc.X0KDPkfR3qs/iA7O', 'Admin', 'Admin', '', '2022-06-14 12:00:00', 'Idle', '', '', '', '2022-06-14 12:00:00'),
+(2, 'operator@pnblack.com', '$2y$10$thE7hIJF/EJvKjmJy7hd5uH3a/BNgSUepkYoES0q80YEzi7VqWsRG', 'Operator', 'Operator', '', '2022-06-14 12:00:00', 'Idle', '', '', '', '2022-06-14 12:00:00');
 
 CREATE TABLE IF NOT EXISTS `conversations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -251,6 +346,13 @@ CREATE TABLE IF NOT EXISTS `messages` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `word_filters` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `word` varchar(255) NOT NULL,
+  `replacement` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `presets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `msg` text NOT NULL,
@@ -261,9 +363,3 @@ INSERT INTO `presets` (`id`, `msg`) VALUES
 (1, 'Thank you for choosing our website! If there is anything else you need, don\'t hesitate to contact us!'),
 (2, 'Hi {name}, how may I help you today?');
 
-CREATE TABLE IF NOT EXISTS `word_filters` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `word` varchar(255) NOT NULL,
-  `replacement` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

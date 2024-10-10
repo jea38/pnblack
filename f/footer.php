@@ -22,7 +22,7 @@
         <section id="footer" class="line py-2">
           <div class="container">
             <div id="nav-logo">
-                <img class="nlogo" src="http://192.168.1.132/pnblack/shared/pnbf22.png">
+                <img class="nlogo" src="https://pnblack.com/shared/pnbf22.png">
              <div class="social-icon">
                 <a href="#"><i class="fa-brands fa-telegram"></i></a>
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -35,7 +35,7 @@
         <h5 class="copy-tag py-2">Copyright &#169 
         <script>
                 document.write(new Date().getFullYear());
-            </script> PnBlack. <a href="../index.php?page=legal">All Rights Reserved.</a>
+            </script> PnBlack. <a href="https://pnblack.com/legal">All Rights Reserved.</a>
         </h5>
       </footer>
 

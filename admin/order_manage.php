@@ -18,8 +18,6 @@ $transaction = [
     'address_country' => '',
     'shipping_method' => '',
     'shipping_amount' => '',
-    'carrier' => '',
-    'tracking_number' => '',
     'created' => date('Y-m-d\TH:i')
 ];
 // Retrieve the products from the database
@@ -73,8 +71,8 @@ if (isset($_GET['id'])) {
     $page = 'Edit';
     if (isset($_POST['submit'])) {
         // Update the transaction
-        $stmt = $pdo->prepare('UPDATE transactions SET txn_id = ?, payment_amount = ?, payment_status = ?, created = ?, payer_email = ?, first_name = ?, last_name = ?, address_street = ?, address_city = ?, address_state = ?, address_zip = ?, address_country = ?, account_id = ?, payment_method = ?, discount_code = ?, carrier = ?, tracking_number = ?, shipping_method = ?, shipping_amount = ? WHERE id = ?');
-        $stmt->execute([ $_POST['txn_id'], $_POST['amount'], $_POST['status'], date('Y-m-d H:i:s', strtotime($_POST['created'])), $_POST['email'], $_POST['first_name'], $_POST['last_name'], $_POST['address_street'], $_POST['address_city'], $_POST['address_state'], $_POST['address_zip'], $_POST['address_country'], empty($_POST['account']) ? NULL : $_POST['account'], $_POST['method'], $_POST['discount_code'], $_POST['carrier'], $_POST['tracking_number'], $_POST['shipping_method'], $_POST['shipping_amount'], $_GET['id'] ]);
+        $stmt = $pdo->prepare('UPDATE transactions SET txn_id = ?, payment_amount = ?, payment_status = ?, created = ?, payer_email = ?, first_name = ?, last_name = ?, address_street = ?, address_city = ?, address_state = ?, address_zip = ?, address_country = ?, account_id = ?, payment_method = ?, discount_code = ?, shipping_method = ?, shipping_amount = ? WHERE id = ?');
+        $stmt->execute([ $_POST['txn_id'], $_POST['amount'], $_POST['status'], date('Y-m-d H:i:s', strtotime($_POST['created'])), $_POST['email'], $_POST['first_name'], $_POST['last_name'], $_POST['address_street'], $_POST['address_city'], $_POST['address_state'], $_POST['address_zip'], $_POST['address_country'], empty($_POST['account']) ? NULL : $_POST['account'], $_POST['method'], $_POST['discount_code'], $_POST['shipping_method'], $_POST['shipping_amount'], $_GET['id'] ]);
         addOrderItems($pdo, $_POST['txn_id']);
         header('Location: index.php?page=orders&success_msg=2');
         exit;
@@ -155,7 +153,7 @@ if (isset($_GET['id'])) {
             <label for="last_name">Last Name</label>
             <input id="last_name" type="text" name="last_name" placeholder="Bloggs" value="<?=htmlspecialchars($transaction['last_name'], ENT_QUOTES)?>">
 
-               <label for="method">Payment Method</label>
+            <label for="method">Payment Method</label>
             <input id="method" type="text" name="method" placeholder="website" value="<?=$transaction['payment_method']?>">
 
             <label for="shipping_method">Shipping Method</label>
@@ -166,14 +164,6 @@ if (isset($_GET['id'])) {
 
             <label for="discount_code">Discount Code</label>
             <input id="discount_code" type="text" name="discount_code" placeholder="Discount Code" value="<?=htmlspecialchars($transaction['discount_code'], ENT_QUOTES)?>">
-            
-
-          <label for="carrier">Carrier</label>
-            <input id="carrier" type="text" name="carrier" placeholder="Carrier" value="<?=htmlspecialchars($transaction['carrier'], ENT_QUOTES)?>">
-
-            <label for="tracking_number">Tracking Number</label>
-            <input id="tracking_number" type="text" name="tracking_number" placeholder="Tracking Number" value="<?=htmlspecialchars($transaction['tracking_number'], ENT_QUOTES)?>">
-
 
             <label for="created"><i class="required">*</i> Date</label>
             <input id="created" type="datetime-local" name="created" value="<?=date('Y-m-d\TH:i', strtotime($transaction['created']))?>" required>

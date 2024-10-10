@@ -33,7 +33,7 @@ $descriptionWithoutImage = preg_replace($pattern, '', $description);
 
 
 echo '<section id="section-3"><div class="container py-5">';
-echo"<a href='../../inu.php'><button class='button-colordot'><span>RETURN</span></button></a>";
+echo"<a href='https://pnblack.com/info/inu'><button class='button-colordot'><span>RETURN</span></button></a>";
 echo "<div class='title flow'><h1 class='pt-3'>$title</h1>";
 echo "<p style='font-size: var(--fs-5);'>$descriptionWithoutImage</p></div>";
 echo '<div class="row_1"><div class="profile-cont"><img src="https://i.pinimg.com/564x/40/c7/b5/40c7b514a7684a1ee7c4be6dada100c4.jpg"/>';
