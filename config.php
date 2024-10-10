@@ -51,9 +51,6 @@ define('paypal_return_url','https://pnblack.azurewebsites.net/placeorder');
 /* Stripe */
 // Accept payments with Stripe?
 define('stripe_enabled',true);
-// Stripe Publishable API Key
-define('stripe_publish_key','pk_live_51MX41kLXJjQ70SJcieNlYlqFpNVoSvYwNS5OJI8ZBtBXDzIBX9N0jS1s1vb7eiFQxzcIp7YJZX3lSyJL1ZBBeylE00pvfnTnKN');
-// Stripe currency
 define('stripe_currency','USD');
 // Stripe IPN url, this should point to the IPN file located in the "ipn" directory
 define('stripe_ipn_url','https://pnblack.azurewebsites.net/ipn/stripe.php');
@@ -68,9 +65,6 @@ define('stripe_return_url','https://pnblack.azurewebsites.net/placeorder');
 // Webhook endpoint URL example: https://yourwebsite.com/pnblack/ipn/coinbase.php?key=SAME_AS_COINBASE_SECRET
 // Accept payments with coinbase?
 define('coinbase_enabled',true);
-// Coinbase API Key
-define('coinbase_key','1c7a03e8-a73d-4bf6-8e19-c7f4fcec1692');
-
 // Coinbase currency
 define('coinbase_currency','USD');
 // Coinbase cancel URl, the page the customer returns to when they cancel the payment
