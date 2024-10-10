@@ -52,9 +52,9 @@ define('paypal_return_url','https://pnblack.com/placeorder');
 // Accept payments with Stripe?
 define('stripe_enabled',true);
 // Stripe Secret API Key
-define('stripe_secret_key','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');
+//define('stripe_secret_key','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');
 // Stripe Publishable API Key
-define('stripe_publish_key','pk_live_51MX41kLXJjQ70SJcieNlYlqFpNVoSvYwNS5OJI8ZBtBXDzIBX9N0jS1s1vb7eiFQxzcIp7YJZX3lSyJL1ZBBeylE00pvfnTnKN');
+//define('stripe_publish_key','pk_live_51MX41kLXJjQ70SJcieNlYlqFpNVoSvYwNS5OJI8ZBtBXDzIBX9N0jS1s1vb7eiFQxzcIp7YJZX3lSyJL1ZBBeylE00pvfnTnKN');
 // Stripe currency
 define('stripe_currency','USD');
 // Stripe IPN url, this should point to the IPN file located in the "ipn" directory
@@ -64,7 +64,7 @@ define('stripe_cancel_url','https://pnblack.com/cart');
 // Stripe return URL, the page the customer returns to after the payment has been made
 define('stripe_return_url','https://pnblack.com/placeorder');
 // Stripe webhook secret, this is used to verify the webhook request
-define('stripe_webhook_secret','whsec_5MD3OxwjGCrm0uACFOnDdSBi8TWLLvC5');
+//define('stripe_webhook_secret','whsec_5MD3OxwjGCrm0uACFOnDdSBi8TWLLvC5');
 
 /* Coinbase */
 // Create a new webhook endpoint in the coinbase commerce dashboard and add the full url to the IPN file along with the key parameter
