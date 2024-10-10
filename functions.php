@@ -93,7 +93,7 @@ echo <<<EOT
     
     <!-- Basic Information -->
     <title>$title</title>
-   <link rel="icon" type="image/png" href=" favicon.png">
+   <link rel="icon" type="image/png" href="https://pnblack.azurewebsites.net/favicon.png">
     <meta name="description" content="Discover a range of products and stay tuned for more.">
 
     <!-- Robots Meta -->
@@ -104,7 +104,7 @@ echo <<<EOT
     <meta name="msvalidate.01" content="Your-Bing-Verification-Code">
     
     <!-- Canonical Link -->
-    <link rel="canonical" href=" ">
+    <link rel="canonical" href="https://pnblack.azurewebsites.net/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:locale" content="en_US">
@@ -112,7 +112,7 @@ echo <<<EOT
     <meta property="og:type" content="website">
     <meta property="og:title" content="$site_name">
     <meta property="og:description" content="Discover a range of products and stay tuned for more.">
-    <meta property="og:url" content=" ">
+    <meta property="og:url" content="https://pnblack.azurewebsites.net/">
     <meta property="fb:app_id" content="Your-Facebook-App-ID">
     <meta property="og:image" content="https://pnblack.azurewebsites.net/shared/featured-image.jpg">
     <meta property="og:image:secure_url" content="https://pnblack.azurewebsites.net/shared/featured-image.jpg">
@@ -124,10 +124,10 @@ echo <<<EOT
     <meta name="twitter:image" content="https://pnblack.azurewebsites.net/shared/featured-image.jpg">
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
-    <link rel='stylesheet' href=' css/main.css'>
-    <link rel='stylesheet' href=' css/pnblack.css'>
-    <link rel='stylesheet' href=' css/2.css'>
-    <link rel='stylesheet' href=' css/p_view.css'>
+    <link rel='stylesheet' href='https://pnblack.azurewebsites.net/css/main.css'>
+    <link rel='stylesheet' href='https://pnblack.azurewebsites.net/css/pnblack.css'>
+    <link rel='stylesheet' href='https://pnblack.azurewebsites.net/css/2.css'>
+    <link rel='stylesheet' href='https://pnblack.azurewebsites.net/css/p_view.css'>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
@@ -142,7 +142,7 @@ echo <<<EOT
     <header>
         <nav class="container">
           <div id="nav-logo">
-            <img class="nlogo" src=" shared/pnbf22.png">
+            <img class="nlogo" src="https://pnblack.azurewebsites.net/shared/pnbf22.png">
           </div>
          
           <div class="hamburger">
@@ -189,7 +189,7 @@ echo <<<EOT
                                 </div>
                             </li>
                             <li class="fsmenu--list-element">
-                                <a href=" info/inu.php">
+                                <a href="https://pnblack.azurewebsites.net/info/inu.php">
                                     <span>Info & Updates</span>
                                 </a>
                                 <div class="fsmenu--scrolling-text">
@@ -202,7 +202,7 @@ echo <<<EOT
                                 </div>
                             </li>
                             <li class="fsmenu--list-element">
-                                <a href=" lvs/contact.php">
+                                <a href="https://pnblack.azurewebsites.net/lvs/contact.php">
                                     <span>Contact Us</span>
                                 </a>
                                 <div class="fsmenu--scrolling-text">
@@ -323,7 +323,7 @@ echo <<<EOT
         <section id="footer" class="line py-2">
           <div class="container">
             <div id="nav-logo">
-                <img class="nlogo" src=" shared/pnbf22.png">
+                <img class="nlogo" src="https://pnblack.azurewebsites.net/shared/pnbf22.png">
              <div class="social-icon">
                 <a href="#"><i class="fa-brands fa-telegram"></i></a>
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -334,7 +334,7 @@ echo <<<EOT
       
         </section>
         <h5 class="copy-tag py-2">Copyright &#169 
-        $year PnBlack. <a href=" legal">All Rights Reserved.</a>
+        $year PnBlack. <a href="https://pnblack.azurewebsites.net/legal">All Rights Reserved.</a>
         </h5>
       </footer>
 
@@ -345,9 +345,9 @@ echo <<<EOT
 <script>
 const currency_code = "$currency_code", base_url = "$base_url", rewrite_url = $rewrite_url;
 </script>
-<script src=" script.js"></script>
-<script src=" js/p_view.js"></script>
-<script src=" js/main.js"></script>
+<script src="https://pnblack.azurewebsites.net/script.js"></script>
+<script src="https://pnblack.azurewebsites.net/js/p_view.js"></script>
+<script src="https://pnblack.azurewebsites.net/js/main.js"></script>
 
 </body>
 </html>
@@ -405,7 +405,7 @@ echo <<<EOT
 		<meta name="viewport" content="width=device-width,minimum-scale=1">
    <meta http-equiv="refresh" content="4000;url=index.php?page=logout" />
 		<title>$title</title>
-       <link rel="icon" type="image/png" href=" favicon.png">
+       <link rel="icon" type="image/png" href="https://pnblack.azurewebsites.net/favicon.png">
 		<link href="admin.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
 	</head>
