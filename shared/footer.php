@@ -22,7 +22,7 @@
         <section id="footer" class="line py-2">
           <div class="container">
             <div id="nav-logo">
-                <img class="nlogo" src="https://pnblack.com/shared/pnbf22.png">
+                <img class="nlogo" src="https://pnblack.azurewebsites.net/shared/pnbf22.png">
              <div class="social-icon">
                 <a href="#"><i class="fa-brands fa-telegram"></i></a>
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -36,7 +36,7 @@
         <h5 class="copy-tag py-2">Copyright &#169 
             <script>
                 document.write(new Date().getFullYear());
-            </script> <?="$site_name"?>. <a href="https://pnblack.com/legal">All Rights Reserved.</a>
+            </script> <?="$site_name"?>. <a href="https://pnblack.azurewebsites.net/legal">All Rights Reserved.</a>
         </h5>
       </footer>
 
@@ -44,9 +44,9 @@
 <script>
     $('#description').trumbowyg();
 </script>
-<script src="https://pnblack.com/script.js"></script>
-<script src="https://pnblack.com/js/p_view.js"></script>
-<script src="https://pnblack.com/shared/main.js"></script>
+<script src="https://pnblack.azurewebsites.net/script.js"></script>
+<script src="https://pnblack.azurewebsites.net/js/p_view.js"></script>
+<script src="https://pnblack.azurewebsites.net/shared/main.js"></script>
 
 </body>
 </html>

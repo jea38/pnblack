@@ -4,7 +4,7 @@
 <head>
     <meta charset='UTF-8'>
     <title>PnBlack</title>
-    <link rel='icon' type='image/png' href='https://pnblack.com/shared/pnbs.png'>
+    <link rel='icon' type='image/png' href='https://pnblack.azurewebsites.net/shared/pnbs.png'>
     <meta http-equiv='x-ua-compatible' content='ie=edge'>
     <meta content='IE=edge' http-equiv='X-UA-Compatible'>
     <meta name='x-apple-disable-message-reformatting'>
@@ -36,7 +36,7 @@
                             <table border='0' width='100%' cellspacing='0' cellpadding='0' style='border-collapse:collapse'>
                               <tbody>
                                 <tr>
-                                  <td style='width:100%;text-align:left;'><img height='50' src='https://pnblack.com/shared/pnbf22.png' style='border:0'></td>
+                                  <td style='width:100%;text-align:left;'><img height='50' src='https://pnblack.azurewebsites.net/shared/pnbf22.png' style='border:0'></td>
                                 </tr>
                               </tbody>
                             </table>

@@ -1,12 +1,12 @@
 <?php
 // database hostname, you don't usually need to change this
-define('db_host','vuxmysql14');
+define('db_host','pnblack-server.mysql.database.azure.com:3306');
 // database username
-define('db_user','pnblack');
+define('db_user','npjqjzlquh');
 // database password
-define('db_pass','Ascpoi2309#');
+define('db_pass','mk9e22L4PcfzXV$U');
 // database name
-define('db_name','pnblack');
+define('db_name','pnblack-database');
 // database charset, change this only if utf8 is not supported by your language
 define('db_charset','utf8');
 // Authentication required for guests
